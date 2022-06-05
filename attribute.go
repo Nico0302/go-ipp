@@ -320,27 +320,21 @@ func (e *AttributeEncoder) Encode(attribute string, value interface{}) error {
 		}
 
 		for member, value := range value.(map[string]interface{}) {
-			fmt.Println(member, value)
 			if err := e.encodeTag(TagMemberName); err != nil {
 				return err
 			}
-
 			if err := e.writeNullByte(); err != nil {
 				return err
 			}
-
 			if err := e.encodeString(member); err != nil {
 				return err
 			}
-
 			if err := e.encodeTag(TagKeyword); err != nil {
 				return err
 			}
-
 			if err := e.writeNullByte(); err != nil {
 				return err
 			}
-
 			if err := e.encodeString(value.(string)); err != nil {
 				return err
 			}
