@@ -352,8 +352,8 @@ const (
 	AttributeJobKilobyteOctets      = "job-k-octets"
 	AttributeNumberOfDocuments      = "number-of-documents"
 	AttributeJobOriginatingUserName = "job-originating-user-name"
-	AttributeOutputOrder            = "outputorder",
-	AttributeMediaCol               = "media-col",
+	AttributeOutputOrder            = "outputorder"
+	AttributeMediaCol               = "media-col"
 )
 
 // Default attributes
