@@ -352,7 +352,8 @@ const (
 	AttributeJobKilobyteOctets      = "job-k-octets"
 	AttributeNumberOfDocuments      = "number-of-documents"
 	AttributeJobOriginatingUserName = "job-originating-user-name"
-	AttributeOutputOrder            = "outputorder"
+	AttributeOutputOrder            = "outputorder",
+	AttributeMediaCol               = "media-col",
 )
 
 // Default attributes
@@ -416,5 +417,6 @@ var (
 		AttributeStatusMessage:          TagText,
 		AttributeLimit:                  TagInteger,
 		AttributeOutputOrder:            TagName,
+		AttributeMediaCol:               TagBeginCollection,
 	}
 )

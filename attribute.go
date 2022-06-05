@@ -303,7 +303,60 @@ func (e *AttributeEncoder) Encode(attribute string, value interface{}) error {
 			}
 		}
 	default:
-		return fmt.Errorf("type %T is not supported", value)
+		if tag != TagBeginCollection {
+			return fmt.Errorf("type %T is not supported", value)
+		}
+
+		if err := e.encodeTag(TagBeginCollection); err != nil {
+			return err
+		}
+
+		if err := e.encodeString(attribute); err != nil {
+			return err
+		}
+
+		if err := e.writeNullByte(); err != nil {
+			return err
+		}
+
+		for member, value := range value.(map[string]interface{}) {
+			fmt.Println(member, value)
+			if err := e.encodeTag(TagMemberName); err != nil {
+				return err
+			}
+
+			if err := e.writeNullByte(); err != nil {
+				return err
+			}
+
+			if err := e.encodeString(member); err != nil {
+				return err
+			}
+
+			if err := e.encodeTag(TagKeyword); err != nil {
+				return err
+			}
+
+			if err := e.writeNullByte(); err != nil {
+				return err
+			}
+
+			if err := e.encodeString(value.(string)); err != nil {
+				return err
+			}
+		}
+
+		if err := e.encodeTag(TagEndCollection); err != nil {
+			return err
+		}
+
+		if err := e.writeNullByte(); err != nil {
+			return err
+		}
+
+		if err := e.writeNullByte(); err != nil {
+			return err
+		}
 	}
 
 	return nil
